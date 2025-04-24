@@ -61,7 +61,13 @@ class Script(scripts.Script):
                         cfg_mode = gr.Dropdown(dynthres_core.DynThresh.Modes, value="Constant", label="CFG Scale Scheduler", elem_id='dynthres_cfg_mode')
                     mimic_scale_min = gr.Slider(minimum=0.0, maximum=30.0, step=0.5, visible=DISABLE_VISIBILITY, label="Minimum value of the Mimic Scale Scheduler", elem_id='dynthres_mimic_scale_min')
                     cfg_scale_min = gr.Slider(minimum=0.0, maximum=30.0, step=0.5, visible=DISABLE_VISIBILITY, label="Minimum value of the CFG Scale Scheduler", elem_id='dynthres_cfg_scale_min')
-                    sched_val = gr.Slider(minimum=0.0, maximum=40.0, step=0.5, value=4.0, visible=DISABLE_VISIBILITY, label="Scheduler Value", info="Value unique to the scheduler mode - for Power Up/Down, this is the power. For Linear/Cosine Repeating, this is the number of repeats per image.", elem_id='dynthres_sched_val')
+                    with gr.Group(visible=DISABLE_VISIBILITY):
+                        with gr.Row():
+                            sched_val = gr.Slider(minimum=0.0, maximum=40.0, step=0.5, value=4.0, label="Scheduler Value", elem_id='dynthres_sched_val'
+                            )
+                        gr.HTML(
+                            "<small style='margin-top: -0.75rem; display: block;'>Value unique to the scheduler mode – for Power Up/Down, this is the power. For Linear/Cosine Repeating, this is the number of repeats per image.</small>"
+                    )
                     with gr.Row():
                         separate_feature_channels = gr.Checkbox(value=True, label="Separate Feature Channels", elem_id='dynthres_separate_feature_channels')
                         scaling_startpoint = gr.Radio(["ZERO", "MEAN"], value="MEAN", label="Scaling Startpoint")
